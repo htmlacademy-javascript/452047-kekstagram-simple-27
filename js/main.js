@@ -1,30 +1,21 @@
 // Рандомное целое число из заданного интервала
 
-function getRandomNumber(min, max) {
-  if (typeof min !== 'number') { // проверка на число
+function getRandomNumber(a, b) {
+  if (typeof a !== 'number' || typeof b !== 'number') { // проверка на число
     return NaN;
   }
-  if (!Number.isFinite(min)) { // проверка на завершенность числа
+  if (!Number.isFinite(a) || !Number.isFinite(b)) { // проверка на завершенность числа
     return NaN;
   }
-  if (min < 0) { // проверка на положительное значение числа
+  if (a < 0 || b < 0) { // проверка на положительное значение числа
     return NaN;
   }
-  if (typeof max !== 'number') {
-    return NaN;
-  }
-  if (!Number.isFinite(max)) {
-    return NaN;
-  }
-  if (max < 0) {
-    return NaN;
-  }
-  if (Math.abs(min - max) < 1) { // Проверка разницы чисел в модуле не меньше 1
+  if (Math.abs(a - b) < 1) { // Проверка разницы чисел в модуле не меньше 1
     return NaN;
   }
 
-  const safeMin = Math.min(min, max);
-  const safeMax = Math.max(min, max);
+  const safeMin = Math.min(a, b); // Вычисляем минимальное значение из заданных чисел
+  const safeMax = Math.max(a, b); // Вычисляем максимальное значение из заданных чисел
 
   const actualMin = Math.ceil(safeMin); // Округление к ближайшему большему целому с помощью Math.ceil,
   const actualMax = Math.floor(safeMax); // Округление к ближайшему меньшему целому с помощью Math.floor,
@@ -34,7 +25,7 @@ function getRandomNumber(min, max) {
   return Math.floor(result); // Округляем результат (т.к. Math.random генерирует дробные числа от 0 до ~1)
 }
 
-getRandomNumber(1, 3);
+getRandomNumber(7.7, 3.3);
 
 // Функция минимальной и максимальной длины строки
 
