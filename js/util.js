@@ -29,11 +29,13 @@ getRandomNumber(7.7, 3.3);
 
 // Функция минимальной и максимальной длины строки
 
-function isStringValid(string, minLength, maxLength) {
-  return string.length >= minLength && maxLength >= string.length;
+const MIN_STRING = 20;
+const MAX_STRING = 140;
+
+function isStringValid(string) {
+  return string.length >= MIN_STRING && MAX_STRING >= string.length;
 }
 
-isStringValid('Проверочный текст комментария', 20, 140);
 
 // Вернуть случайный элемент массива
 
@@ -52,4 +54,4 @@ const getRandomArrayElement = (elements) => {
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-export {getRandomNumber, getRandomArrayElement, isEscapeKey};
+export {getRandomNumber, isStringValid, getRandomArrayElement, isEscapeKey};

@@ -1,4 +1,4 @@
-import { isEscapeKey } from './util.js';
+import { isEscapeKey, isStringValid } from './util.js';
 
 const body = document.body;
 const form = document.querySelector('.img-upload__form');
@@ -6,6 +6,8 @@ const cancelButton = document.querySelector('#upload-cancel');
 const imgUpload = document.querySelector('.img-upload__label');
 const imgOverlay = document.querySelector('.img-upload__overlay');
 const descriptionField = document.querySelector('.text__description');
+const uploadText = document.querySelector('.img-upload__text');
+const uploadSubmit = document.querySelector('#upload-submit');
 
 const pristine = new Pristine(form, {
   classTo: 'img-upload__text',
@@ -41,9 +43,19 @@ cancelButton.addEventListener('click', () => {
   hideModal();
 });
 
-const onFormSubmit = (evt) => {
+const upload = descriptionField.addEventListener('input', () => {
+  if (isStringValid) {
+    uploadSubmit.removeAttribute('disabled');
+  }
+  else {
+    uploadSubmit.setAttribute('disabled', 'disabled');
+  }
+});
+
+pristine.addValidator(uploadText.querySelector('.text__description'), isStringValid, 'Длина комментария должна содержать от 20 до 140 символов');
+
+form.addEventListener('submit', (evt) => {
+  upload();
   evt.preventDefault();
   pristine.validate();
-};
-
-form.addEventListener('submit', onFormSubmit);
+});
