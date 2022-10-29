@@ -2,12 +2,12 @@ import { isEscapeKey, isStringValid } from './util.js';
 
 const body = document.body;
 const form = document.querySelector('.img-upload__form');
-const cancelButton = document.querySelector('#upload-cancel');
-const imgUpload = document.querySelector('.img-upload__label');
-const imgOverlay = document.querySelector('.img-upload__overlay');
-const descriptionField = document.querySelector('.text__description');
-const uploadText = document.querySelector('.img-upload__text');
-const uploadSubmit = document.querySelector('#upload-submit');
+const cancelButton = form.querySelector('#upload-cancel');
+const imgUpload = form.querySelector('.img-upload__label');
+const imgOverlay = form.querySelector('.img-upload__overlay');
+const descriptionField = form.querySelector('.text__description');
+const uploadText = form.querySelector('.img-upload__text');
+const uploadSubmit = form.querySelector('#upload-submit');
 
 const pristine = new Pristine(form, {
   classTo: 'img-upload__text',
@@ -15,7 +15,7 @@ const pristine = new Pristine(form, {
 });
 
 const onEscKeydown = (evt) => {
-  if (isEscapeKey && descriptionField !== document.activeElement) {
+  if (isEscapeKey() && descriptionField !== document.activeElement) {
     evt.preventDefault();
     hideModal();
   }
@@ -35,16 +35,12 @@ function showModal () {
   document.addEventListener('keydown', onEscKeydown);
 }
 
-imgUpload.addEventListener('click', () => {
-  showModal();
-});
+imgUpload.addEventListener('click', showModal());
 
-cancelButton.addEventListener('click', () => {
-  hideModal();
-});
+cancelButton.addEventListener('click', hideModal());
 
 const upload = descriptionField.addEventListener('input', () => {
-  if (isStringValid) {
+  if (isStringValid()) {
     uploadSubmit.removeAttribute('disabled');
   }
   else {
