@@ -110,14 +110,6 @@ noUiSlider.create(sliderElement, {
 
 updateSlider();
 
-/*
-if (EventTarget.value === EFFECTS.chrome.name) {
-  uploadPreview.classList.add(EFFECTS.chrome.className);
-  createSlider(...EFFECTS.chrome.specs);
-} else {
-  uploadPreview.classList.remove(Effect.chrome.className);
-}*/
-
 form.addEventListener('change', onFormChange);
 sliderElement.noUiSlider.on('update', onSliderUpdate);
 
