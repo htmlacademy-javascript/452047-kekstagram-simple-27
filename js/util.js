@@ -52,6 +52,6 @@ const getRandomArrayElement = (elements) => {
   return elements[getRandomNumber(0, elements.length - 1)];
 };
 
-const isEscapeKey = (evt) => evt.key === 'Escape';
+const isEscapeKey = (evtKey) => evtKey === 'Escape';
 
 export {getRandomNumber, isStringValid, getRandomArrayElement, isEscapeKey};

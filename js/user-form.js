@@ -35,13 +35,9 @@ function showModal () {
   document.addEventListener('keydown', onEscKeydown);
 }
 
-imgUpload.addEventListener('click', () => {
-  showModal();
-});
+imgUpload.addEventListener('click', showModal);
 
-cancelButton.addEventListener('click', () => {
-  hideModal();
-});
+cancelButton.addEventListener('click', hideModal);
 
 const upload = descriptionField.addEventListener('input', () => {
   if (isStringValid()) {
