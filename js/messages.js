@@ -22,14 +22,14 @@ const showError = () => {
 };
 
 const onSuccessMessageEscKeydown = (evt) => {
-  if (isEscapeKey(evt)) {
+  if (isEscapeKey(evt.key)) {
     evt.preventDefault();
     document.body.removeChild(success);
   }
 };
 
 const onErrorMessageEscKeydown = (evt) => {
-  if (isEscapeKey(evt)) {
+  if (isEscapeKey(evt.key)) {
     evt.preventDefault();
     document.body.removeChild(error);
   }

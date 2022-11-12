@@ -1,5 +1,4 @@
-import {renderPhotos} from './render-photos.js';
-import './user-form.js';
+import { renderPhotos } from './render-photos.js';
 import { getData } from './api.js';
 
 getData(renderPhotos);

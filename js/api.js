@@ -31,13 +31,12 @@ const sendData = (onSuccess, onFail) => {
     },
   ).then((response) => {
     if (response.ok) {
-      onSuccess();
-    } else {
-      onFail();
+      return onSuccess();
     }
+    throw new Error('Нет данных');
   })
-    .catch(() => {
-      onFail();
+    .catch((error) => {
+      onFail(error.message);
     });
 };
 

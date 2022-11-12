@@ -7,7 +7,7 @@ import { resetEffects } from './photo-effects.js';
 const body = document.body;
 const form = document.querySelector('.img-upload__form');
 const cancelButton = form.querySelector('#upload-cancel');
-const imgUpload = form.querySelector('.img-upload__label');
+const imgUpload = form.querySelector('#upload-file');
 const imgOverlay = form.querySelector('.img-upload__overlay');
 const descriptionField = form.querySelector('.text__description');
 const uploadText = form.querySelector('.img-upload__text');
@@ -41,7 +41,7 @@ function showModal () {
   resetEffects();
 }
 
-imgUpload.addEventListener('click', showModal);
+imgUpload.addEventListener('change', showModal);
 
 cancelButton.addEventListener('click', hideModal);
 

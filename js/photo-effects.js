@@ -8,6 +8,7 @@ const EFFECTS = [
     name: 'none',
     min: 0,
     max: 100,
+    start: 0,
     step: 1,
   },
   {
@@ -15,6 +16,7 @@ const EFFECTS = [
     style: 'grayscale',
     min: 0,
     max: 1,
+    start: 0,
     step: 0.1,
     unit: '',
   },
@@ -23,14 +25,16 @@ const EFFECTS = [
     style: 'sepia',
     min: 0,
     max: 1,
+    start: 0,
     step: 0.1,
     unit: '',
   },
   {
     name: 'marvin',
-    style: 'marvin',
+    style: 'invert',
     min: 0,
     max: 100,
+    start: 0,
     step: 1,
     unit: '%',
   },
@@ -38,15 +42,17 @@ const EFFECTS = [
     name: 'phobos',
     style: 'blur',
     min: 0,
-    max: 1,
+    max: 3,
+    start: 0,
     step: 0.1,
     unit: 'px',
   },
   {
     name: 'heat',
     style: 'brightness',
-    min: 0,
-    max: 1,
+    min: 1,
+    max: 3,
+    start: 1,
     step: 0.1,
     unit: '',
   },
@@ -64,7 +70,7 @@ const updateSlider = () => {
       max: chosenEffect.max,
     },
     step: chosenEffect.step,
-    start: chosenEffect.max,
+    start: chosenEffect.start,
   });
 
   if (isDefault()) {
@@ -81,14 +87,11 @@ const onFormChange = (evt) => {
 };
 
 const onSliderUpdate = () => {
-  imagePreview.style.filter = 'none';
-  imagePreview.className = '';
-  effectValue.value = '';
   if (isDefault()) {
     return;
   }
   const sliderValue = sliderElement.noUiSlider.get();
-  imagePreview.style = `${chosenEffect.style}(${sliderValue}${chosenEffect.unit})`;
+  imagePreview.style.filter = `${chosenEffect.style}(${sliderValue}${chosenEffect.unit})`;
   imagePreview.classList.add(`effects__preview--${chosenEffect.name}`);
   effectValue.value = sliderValue;
 };
@@ -103,7 +106,7 @@ noUiSlider.create(sliderElement, {
     min: DEFAULT_EFFECT.min,
     max: DEFAULT_EFFECT.max,
   },
-  start: DEFAULT_EFFECT.max,
+  start: DEFAULT_EFFECT.start,
   step: DEFAULT_EFFECT.step,
   connect: 'lower',
 });
