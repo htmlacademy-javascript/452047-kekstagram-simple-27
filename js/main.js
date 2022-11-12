@@ -1,8 +1,5 @@
 import {renderPhotos} from './render-photos.js';
 import './user-form.js';
-import { resetScale } from './photo-scales.js';
-import { resetEffects } from './photo-effects.js';
+import { getData } from './api.js';
 
-renderPhotos();
-resetScale();
-resetEffects();
+getData(renderPhotos);
