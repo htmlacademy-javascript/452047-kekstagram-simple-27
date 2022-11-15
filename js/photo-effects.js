@@ -98,6 +98,7 @@ const onSliderUpdate = () => {
 
 const resetEffects = () => {
   chosenEffect = DEFAULT_EFFECT;
+  imagePreview.style.filter = 'none';
   updateSlider();
 };
 

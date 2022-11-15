@@ -19,7 +19,7 @@ const pristine = new Pristine(form, {
 });
 
 const onEscKeydown = (evt) => {
-  if (isEscapeKey() && descriptionField !== document.activeElement) {
+  if (isEscapeKey(evt.key) && descriptionField !== document.activeElement) {
     evt.preventDefault();
     hideModal();
   }

@@ -66,21 +66,19 @@ function closeErrorMessage () {
 }
 
 const showAlert = (message) => {
-  const alertBlockElement = document.createElement('div');
-  alertBlockElement.style.position = 'absolute';
-  alertBlockElement.style.padding = '15px 10px';
-  alertBlockElement.style.left = '0';
-  alertBlockElement.style.top = '0';
-  alertBlockElement.style.textAlign = 'center';
-  alertBlockElement.style.fontSize = '24px';
-  alertBlockElement.style.backgroundColor = '#ffffff';
-  alertBlockElement.style.zIndex = '20';
-  alertBlockElement.textContent = message;
-  document.body.append(alertBlockElement);
+  const alert = document.createElement('div');
+  alert.style.position = 'absolute';
+  alert.style.padding = '15px 10px';
+  alert.style.left = '0';
+  alert.style.top = '0';
+  alert.style.textAlign = 'center';
+  alert.style.fontSize = '24px';
+  alert.style.backgroundColor = '#ffffff';
+  alert.style.zIndex = '20';
+  alert.textContent = message;
+  document.body.append(alert);
 
-  setTimeout(() => {
-    alertBlockElement.remove();
-  }, ALERT_SHOWTIME);
+  setTimeout(alert.remove(), ALERT_SHOWTIME);
 };
 
 export { showError, showSuccess, showAlert };

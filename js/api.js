@@ -1,5 +1,5 @@
 import { hideModal, setUserFormSubmit } from './user-form.js';
-import { showAlert } from './messages.js';
+//import { showAlert } from './messages.js';
 
 const uploadForm = document.querySelector('.img-upload__form');
 
@@ -16,7 +16,7 @@ const getData = (onSuccess) => {
       onSuccess(date);
     })
     .catch(() => {
-      showAlert('Ошибка получения данных с сервера. Попробуйте ещё раз.');
+      //showAlert('Ошибка получения данных с сервера. Попробуйте ещё раз.');
     });
 };
 
@@ -33,7 +33,7 @@ const sendData = (onSuccess, onFail) => {
     if (response.ok) {
       return onSuccess();
     }
-    throw new Error('Нет данных');
+    throw new Error('Ошибка отправки формы. Попробуйте ещё раз.');
   })
     .catch((error) => {
       onFail(error.message);
