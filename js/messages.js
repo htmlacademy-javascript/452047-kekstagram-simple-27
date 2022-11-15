@@ -1,5 +1,7 @@
 import { isEscapeKey } from './util.js';
 
+const ALERT_SHOWTIME = 7000;
+
 const templateSuccessElement = document.querySelector('#success').content.querySelector('.success');
 const success = templateSuccessElement.cloneNode(true);
 const successInnerElement = success.querySelector('.success__inner');
@@ -8,18 +10,6 @@ const templateErrorElement = document.querySelector('#error').content.querySelec
 const error = templateErrorElement.cloneNode(true);
 const errorInnerElement = error.querySelector('.error__inner');
 const errorButtonElement = error.querySelector('.error__button');
-
-const ALERT_SHOWTIME = 7000;
-
-const showSuccess = () => {
-  document.body.append(success);
-  closeSuccessMessage();
-};
-
-const showError = () => {
-  document.body.append(error);
-  closeErrorMessage();
-};
 
 const onSuccessMessageEscKeydown = (evt) => {
   if (isEscapeKey(evt.key)) {
@@ -49,21 +39,31 @@ const onErrorMessageClickClose = (evt) => {
   }
 };
 
-function closeSuccessMessage () {
+const closeSuccessMessage = () => {
   successButtonElement.addEventListener('click', () => {
     document.body.removeChild(success);
   });
   document.addEventListener('keydown', onSuccessMessageEscKeydown);
   document.addEventListener('click', onSuccessMessageClickClose);
-}
+};
 
-function closeErrorMessage () {
+const closeErrorMessage = () => {
   errorButtonElement.addEventListener('click', () => {
     document.body.removeChild(error);
   });
   document.addEventListener('keydown', onErrorMessageEscKeydown, { once: true });
   document.addEventListener('click', onErrorMessageClickClose);
-}
+};
+
+const showSuccess = () => {
+  document.body.append(success);
+  closeSuccessMessage();
+};
+
+const showError = () => {
+  document.body.append(error);
+  closeErrorMessage();
+};
 
 const showAlert = (message) => {
   const alert = document.createElement('div');
@@ -73,7 +73,7 @@ const showAlert = (message) => {
   alert.style.top = '0';
   alert.style.textAlign = 'center';
   alert.style.fontSize = '24px';
-  alert.style.backgroundColor = '#ffffff';
+  alert.style.backgroundColor = '#d41d02';
   alert.style.zIndex = '20';
   alert.textContent = message;
   document.body.append(alert);

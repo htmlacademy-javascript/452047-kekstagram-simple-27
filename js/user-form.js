@@ -47,10 +47,12 @@ cancelButton.addEventListener('click', hideModal);
 
 const blockSubmitButton = () => {
   uploadSubmit.disabled = true;
+  uploadSubmit.textContent = 'Опубликовываю...';
 };
 
 const unblockSubmitButton = () => {
   uploadSubmit.disabled = false;
+  uploadSubmit.textContent = 'Опубликовать';
 };
 
 pristine.addValidator(uploadText.querySelector('.text__description'), isStringValid, 'Длина комментария должна содержать от 20 до 140 символов');
@@ -65,11 +67,11 @@ const setUserFormSubmit = (onSuccess) => {
       sendData(
         () => {
           onSuccess();
-          showSuccess('Форма успешно отправлена!');
+          showSuccess('.success');
           unblockSubmitButton();
         },
         () => {
-          showError('Ошибка отправки формы. Попробуйте ещё раз');
+          showError('.error');
           unblockSubmitButton();
         },
         new FormData(evt.target),

@@ -1,52 +1,47 @@
-// Рандомное целое число из заданного интервала
-
-function getRandomNumber(a, b) {
-  if (typeof a !== 'number' || typeof b !== 'number') { // проверка на число
-    return NaN;
-  }
-  if (!Number.isFinite(a) || !Number.isFinite(b)) { // проверка на завершенность числа
-    return NaN;
-  }
-  if (a < 0 || b < 0) { // проверка на положительное значение числа
-    return NaN;
-  }
-  if (Math.abs(a - b) < 1) { // Проверка разницы чисел в модуле не меньше 1
-    return NaN;
-  }
-
-  const safeMin = Math.min(a, b); // Вычисляем минимальное значение из заданных чисел
-  const safeMax = Math.max(a, b); // Вычисляем максимальное значение из заданных чисел
-
-  const actualMin = Math.ceil(safeMin); // Округление к ближайшему большему целому с помощью Math.ceil,
-  const actualMax = Math.floor(safeMax); // Округление к ближайшему меньшему целому с помощью Math.floor,
-
-  const result = Math.random() * (actualMax - actualMin + 1) + actualMin; // складываем дельту с мин. значением, чтобы получить итоговое случайное число.
-
-  return Math.floor(result); // Округляем результат (т.к. Math.random генерирует дробные числа от 0 до ~1)
-}
-
-getRandomNumber(7.7, 3.3);
-
 // Функция минимальной и максимальной длины строки
 
 const MIN_STRING = 20;
 const MAX_STRING = 140;
 
-function isStringValid(string) {
-  return string.length >= MIN_STRING && MAX_STRING >= string.length;
-}
+const isStringValid = (string) => string.length >= MIN_STRING && MAX_STRING >= string.length;
 
+// Рандомное целое число из заданного интервала
+
+const getRandomNumber = (a, b) => {
+  if (typeof a !== 'number' || typeof b !== 'number') {
+    return NaN;
+  }
+  if (!Number.isFinite(a) || !Number.isFinite(b)) {
+    return NaN;
+  }
+  if (a < 0 || b < 0) {
+    return NaN;
+  }
+  if (Math.abs(a - b) < 1) {
+    return NaN;
+  }
+
+  const safeMin = Math.min(a, b);
+  const safeMax = Math.max(a, b);
+
+  const actualMin = Math.ceil(safeMin);
+  const actualMax = Math.floor(safeMax);
+
+  const result = Math.random() * (actualMax - actualMin + 1) + actualMin;
+
+  return Math.floor(result);
+};
 
 // Вернуть случайный элемент массива
 
 const getRandomArrayElement = (elements) => {
-  if (!Array.isArray(elements)) { // Проверка на массив
+  if (!Array.isArray(elements)) {
     return undefined;
   }
-  if (elements.length === 0) { // Проверка на присутствие длины массива
+  if (elements.length === 0) {
     return undefined;
   }
-  if (elements.length === 1) { // Проверка на саму длину массива
+  if (elements.length === 1) {
     return elements[0];
   }
   return elements[getRandomNumber(0, elements.length - 1)];
@@ -54,4 +49,4 @@ const getRandomArrayElement = (elements) => {
 
 const isEscapeKey = (evtKey) => evtKey === 'Escape';
 
-export {getRandomNumber, isStringValid, getRandomArrayElement, isEscapeKey};
+export { getRandomNumber, isStringValid, getRandomArrayElement, isEscapeKey };
