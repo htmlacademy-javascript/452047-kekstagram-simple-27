@@ -1,12 +1,12 @@
-import {createPhotos} from './create-photos.js';
+import { createPhotos } from './create-photos.js';
 
 const renderPhotos = () => {
-  const photoTemplate = document.querySelector('#picture').content.querySelector('.picture'); // Находим внутри шаблона элемент для фотографий
+  const photoTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
-  const photos = createPhotos(); // Создаем переменную для генератора фотографий
+  const photos = createPhotos();
 
-  const photoListSection = document.querySelector('.pictures'); // Находим секцию для расположения будущих фотографий
-  const photosListFragment = document.createDocumentFragment(); // Создание основы для расположения фотографий
+  const photoListSection = document.querySelector('.pictures');
+  const photosListFragment = document.createDocumentFragment();
 
   // Создание массива фотографий с рандомным количеством лайков и комментариев
 
@@ -18,7 +18,7 @@ const renderPhotos = () => {
     photosListFragment.appendChild(photo);
   });
 
-  photoListSection.appendChild(photosListFragment); // Добавление фотографий в соответствующую секцию
+  photoListSection.appendChild(photosListFragment);
 };
 
-export {renderPhotos};
+export { renderPhotos };
