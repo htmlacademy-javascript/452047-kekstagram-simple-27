@@ -11,58 +11,62 @@ const error = templateErrorElement.cloneNode(true);
 const errorInnerElement = error.querySelector('.error__inner');
 const errorButtonElement = error.querySelector('.error__button');
 
-const onSuccessMessageEscKeydown = (evt) => {
+function onSuccessMessageEscKeydown (evt) {
   if (isEscapeKey(evt.key)) {
     evt.preventDefault();
     document.body.removeChild(success);
+    document.removeEventListener('click', onSuccessMessageClickClose);
+    document.removeEventListener('keydown', onSuccessMessageEscKeydown);
   }
-};
+}
 
-const onErrorMessageEscKeydown = (evt) => {
+function onErrorMessageEscKeydown (evt) {
   if (isEscapeKey(evt.key)) {
     evt.preventDefault();
     document.body.removeChild(error);
+    document.removeEventListener('click', onErrorMessageClickClose);
+    document.removeEventListener('keydown', onErrorMessageEscKeydown);
   }
-};
+}
 
-const onSuccessMessageClickClose = (evt) => {
+function onSuccessMessageClickClose (evt) {
   const onOutSideClick = evt.composedPath().includes(successInnerElement);
   if (!onOutSideClick) {
     document.body.removeChild(success);
+    document.removeEventListener('click', onSuccessMessageClickClose);
+    document.removeEventListener('keydown', onSuccessMessageEscKeydown);
   }
-};
+}
 
-const onErrorMessageClickClose = (evt) => {
+function onErrorMessageClickClose (evt) {
   const onOutSideClick = evt.composedPath().includes(errorInnerElement);
   if (!onOutSideClick) {
     document.body.removeChild(error);
+    document.removeEventListener('click', onErrorMessageClickClose);
+    document.removeEventListener('keydown', onErrorMessageEscKeydown);
   }
-};
+}
 
-const closeSuccessMessage = () => {
+const showSuccess = () => {
+  document.body.append(success);
   successButtonElement.addEventListener('click', () => {
     document.body.removeChild(success);
+    document.removeEventListener('click', onSuccessMessageClickClose);
+    document.removeEventListener('keydown', onSuccessMessageEscKeydown);
   });
   document.addEventListener('keydown', onSuccessMessageEscKeydown);
   document.addEventListener('click', onSuccessMessageClickClose);
 };
 
-const closeErrorMessage = () => {
+const showError = () => {
+  document.body.append(error);
   errorButtonElement.addEventListener('click', () => {
     document.body.removeChild(error);
+    document.removeEventListener('keydown', onErrorMessageEscKeydown);
+    document.removeEventListener('click', onErrorMessageClickClose);
   });
   document.addEventListener('keydown', onErrorMessageEscKeydown, { once: true });
   document.addEventListener('click', onErrorMessageClickClose);
-};
-
-const showSuccess = () => {
-  document.body.append(success);
-  closeSuccessMessage();
-};
-
-const showError = () => {
-  document.body.append(error);
-  closeErrorMessage();
 };
 
 const showAlert = (message) => {
@@ -78,7 +82,7 @@ const showAlert = (message) => {
   alert.textContent = message;
   document.body.append(alert);
 
-  setTimeout(alert.remove(), ALERT_SHOWTIME);
+  setTimeout(alert.remove, ALERT_SHOWTIME);
 };
 
 export { showError, showSuccess, showAlert };
