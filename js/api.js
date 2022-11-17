@@ -1,11 +1,15 @@
-import { hideModal, setUserFormSubmit } from './user-form.js';
+import { onHideModal, setUserFormSubmit } from './user-form.js';
 import { showAlert } from './messages.js';
 
 const uploadForm = document.querySelector('.img-upload__form');
 
+const GET_DATA = 'https://27.javascript.pages.academy/kekstagram-simple/data';
+const SEND_DATA = 'https://27.javascript.pages.academy/kekstagram-simple';
+
 const getData = (onSuccess) => {
+
   fetch(
-    'https://27.javascript.pages.academy/kekstagram-simple/data',
+    GET_DATA,
     {
       method: 'GET',
       credentials: 'same-origin',
@@ -24,7 +28,7 @@ const sendData = (onSuccess, onFail) => {
   const formData = new FormData(uploadForm);
 
   fetch(
-    'https://27.javascript.pages.academy/kekstagram-simple',
+    SEND_DATA,
     {
       method: 'POST',
       body: formData,
@@ -40,6 +44,6 @@ const sendData = (onSuccess, onFail) => {
     });
 };
 
-setUserFormSubmit(hideModal);
+setUserFormSubmit(onHideModal);
 
 export { getData, sendData };
